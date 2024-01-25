@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Printing out using until loop
 TEXT="Best School"
 i=15
 until ((i <= 5));do

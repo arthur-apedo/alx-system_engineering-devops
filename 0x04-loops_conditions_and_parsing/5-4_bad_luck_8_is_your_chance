@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#A script to show use of elif in bash
 TEXT="Best School"
 i=1
 while ((i <= 10));do

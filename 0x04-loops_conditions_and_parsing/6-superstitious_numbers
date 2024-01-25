@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# A script involving use of case conditional statement
 TEXT="Best School"
 i=1
 while ((i <= 20));do
@@ -13,7 +14,7 @@ while ((i <= 20));do
 			echo "bad luck from Italy"
 			;;
 		*)
-			echo "$TEXT"
+			echo "$i"
 			;;
 	esac
 	((i++))

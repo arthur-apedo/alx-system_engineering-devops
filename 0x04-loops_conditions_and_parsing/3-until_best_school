@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+TEXT="Best School"
+i=15
+until ((i <= 5));do
+	echo "$TEXT"
+	((i--))
+done

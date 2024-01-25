@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#A script to print all files in folder
+for i in *;do
+	echo "$i"
+done

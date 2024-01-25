@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 #A script to print all files in folder
 for i in *;do
-	echo "$i"
+	if [[ -f "$i" ]];then
+		NAME=$(echo "$i" | cut -d'-' -f2-)
+		echo "$NAME"
+	fi
 done

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Read and cut information from /etc/passwd
 while IFS=':' read -r username paswd usid grpid usidinfo home cmdshell; do
-	echo "The user $username is part of the$grpid, lives in $home and rides $cmdshell. $usid place is protected by the passcode $paswd, more info about the user here: $usidinfo"
+	echo "The user $username is part of the $grpid gang, lives in $home and rides $cmdshell. $usid place is protected by the passcode $paswd, more info about the user here: $usidinfo"
 done < /etc/passwd
 

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#A script to show the bash pid using top
+ps -aux  | grep bash

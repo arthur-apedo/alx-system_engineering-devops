@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Transfers a file from client to a server using scp
 
 if [ "$#" -lt 4 ]; then

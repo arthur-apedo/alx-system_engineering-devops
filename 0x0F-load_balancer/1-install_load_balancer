@@ -2,20 +2,20 @@
 # installs loadbalancer and configure HAproxy
 
 apt-get install -y software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy-2.0
+add-apt-repository -y ppa:vbernat/haproxy-2.8
 apt-get -y update
-apt-get install -y haproxy=2.0.\*
+apt-get install -y haproxy=2.8.\*
 
-echo "ENABLED=1" > /etc/default/haproxy
 echo "
-   listen load_balancer
+   frontend myfrontend
    bind *:80
-   balance roundrobin
    mode http
-   option httpclose
-   option forwardfor
-   server 344195-web-01 54.237.227.206:80 check
-   server 344195-web-02 34.229.49.26:80 check
+   default_backend mybackend
+
+   backend mybackend
+   balance roundrobin
+   server 202556-web-01 34.227.101.220:80 check
+   server 202556-web-02 52.86.118.253:80 check
 " >> /etc/haproxy/haproxy.cfg
 
-service haproxy start
+sudo service haproxy start

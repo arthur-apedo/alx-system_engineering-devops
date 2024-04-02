@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Installs Nginx on a webserver
 
-sudo apt-get update -y
+sudo apt-get update
 sudo apt-get -y install nginx
 echo "server {
     listen 80 default_server;
@@ -12,4 +12,4 @@ echo "server {
 }" > /etc/nginx/sites-available/default
 
 echo "Hello World!" | /var/www/html/index.html
-service nginx restart
+sudo service nginx restart

@@ -2,7 +2,7 @@
 # installs loadbalancer and configure HAproxy
 
 sudo apt-get -y update
-sudo apt-get install haproxy
+sudo apt-get -y install haproxy
 
 echo "
 frontend myfrontend

@@ -7,8 +7,9 @@ service nginx start
 echo "server {
     listen 80 default_server;
     root /var/www/html;
+    index index.htm index.html index.nginx-debian.html;
     location / {
-    	index index.htm index.html;
+    	try_files $uri $uri/ =404;
     }
 }" > /etc/nginx/sites-available/default
 

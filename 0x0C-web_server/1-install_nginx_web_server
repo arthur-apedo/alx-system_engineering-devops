@@ -5,7 +5,8 @@ apt-get update -y
 apt-get -y install nginx
 service nginx start
 echo "server {
-    listen 80 default_server;
+    listen 80;
+    listen [::]:80;
     root /var/www/html;
     index index.htm index.html index.nginx-debian.html;
     location / {

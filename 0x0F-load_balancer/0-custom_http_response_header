@@ -5,7 +5,7 @@ sudo apt-get -y update
 sudo apt-get -y install nginx
 echo "server {
     listen 80;
-    root /var/www/html
+    root /var/www/html;
     add_header X-Served-By $HOSTNAME;
 
     location /redirect_me {
@@ -18,4 +18,4 @@ echo "server {
 }" > /etc/nginx/sites-available/default
 echo "Hello World!" > /var/www/html/index.html
 echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-sudo service nginx start
+sudo service nginx restart

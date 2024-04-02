@@ -1,6 +1,5 @@
-#!/usn/bin/env bash
-# bash script that configures an Nginx server so that redirect_me
-
+#!/usr/bin/env bash
+#bash script that configures an Nginx server so that redirect_me
 sudo apt-get -y update
 sudo apt-get -y install nginx
 echo 'Hello World!' > /var/www/html/index.nginx-debian.html

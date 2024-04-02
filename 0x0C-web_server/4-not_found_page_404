@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
 # installs nginx and with a cutom 404 page
-apt-get update
-apt-get -y install nginx
-echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
+sudo apt-get update
+sudo apt-get -y install nginx
+
 echo "server {
 	listen 80;
-	listen [::]:80;
+	root /var/www/html;
 
 	server_name _;
 
-	error_page 404 /404.html;
-	location = /404.html {
-		internal;
+	location /redirect_me {
+		return 301 https://www.google.com;
 	}
-}" > /etc/nginx/sites-available/custom_404
-ln -s /etc/nginx/sites-available/custom_404 /etc/nginx/sites-enabled/
-rm /etc/nginx/sites-enabled/default
-service nginx restart
+	error_page 404 /custom_404.html;
+	location / {
+		index index.htm index.html;
+	}
+}" > /etc/nginx/sites-available/default
+echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+sudo service nginx restart

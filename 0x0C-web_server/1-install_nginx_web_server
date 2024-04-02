@@ -10,7 +10,7 @@ echo "server {
     location / {
     	index index.htm index.html;
     }
-}" > "/etc/nginx/sites-available/default"
+}" > /etc/nginx/sites-available/default
 
 echo "Hello World!" | /var/www/html/index.html
 service nginx restart

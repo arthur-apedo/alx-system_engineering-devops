@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #bash script that configures an Nginx server so that redirect_me
-apt-get -y update
-apt-get -y install nginx
+sudo apt-get -y update
+sudo apt-get -y install nginx
 sudo echo 'Hello World!' > /var/www/html/index.nginx-debian.html
 sudo sed -i 's/location \/ {/location \/redirect_me {/' /etc/nginx/sites-available/default
 sudo sed -i's/location \/redirect_me {/a \\treturn 301 https://www.google.com;' /etc/nginx/sites-available/default

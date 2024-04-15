@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# A script that utilizes the dig command to interrgate dns name servers
+# to return the subdomains and records of an ip address
+
+dns_check () {
+	local domain=$1
+	local subdomain=$2
+
+	if [ -z "$subdomain" ]; then
+		subdomains=("www" "lb-01" "web-01" "web-02")
+	else
+		subdomains=("$subdomain")
+	fi
+
+	for sub in "${subdomains[@]}"; do
+		result=$(dig +short "$sub.$domain" | awk '{print $1}')
+		if [ -n "result" ]; then
+			echo "The subdomain $sub is a $(dig +short "$sub.$domain" | awk 'NR==1{print $4}') record and points to $result"
+		fi
+	done
+}
+
+if [ $# -eq 0 ]; then
+	exit 1
+fi
+domain=$1
+subdomain=$2
+dns_check "$domain" "$subdomain"
+

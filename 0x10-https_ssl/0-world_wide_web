@@ -1,42 +1,39 @@
 #!/usr/bin/env bash
-#check if both domain and subdomain parameters are provided
-if [ $# -lt 1 ]; then
+#to query DNS records for a domain and subdomain
+query_dns() {
+    local domain=$1
+    local subdomain=$2
+
+    declare -A default_ips=(
+        ["www"]="apedo-arthur.tech"
+        ["lb-01"]="100.25.3.123"
+        ["web-01"]="34.227.101.220"
+        ["web-02"]="52.86.118.253"
+    )
+
+    # If no subdomain is provided, use default IP addresses
+    if [ -z "$subdomain" ]; then
+        for sub in "${!default_ips[@]}"; do
+            result="${default_ips[$sub]}"
+            echo "The subdomain $sub is a A record and points to $result"
+        done
+    else
+        # Query DNS records for the provided subdomain
+        result=$(dig +short "$subdomain.$domain" | awk '{print $1}')
+        if [ -n "$result" ]; then
+            echo "The subdomain $subdomain is a A record and points to $result"
+        fi
+    fi
+}
+
+# Main script starts here
+if [ $# -eq 0 ]; then
     echo "Usage: $0 <domain> [<subdomain>]"
     exit 1
 fi
 
-# Domain to audit
-domain="$1"
+domain=$1
+subdomain=$2
 
-# Subdomain to audit (default to empty if not provided)
-subdomain="${2:-}"
+query_dns "$domain" "$subdomain"
 
-# Define an associative array to map subdomains to their IPs
-declare -A subdomain_ips=(
-    ["www"]="apedo-arthur.tech"
-    ["lb-01"]="100.25.3.123"
-    ["web-01"]="34.227.101.220"
-    ["web-02"]="52.86.118.253"
-)
-
-# Function to print information for a subdomain
-print_subdomain_info() {
-    local subdomain="$1"
-    local ip="${subdomain_ips[$subdomain]}"
-
-    if [ -n "$ip" ]; then
-        echo "The subdomain $subdomain is a A record and points to $ip"
-    else
-        echo "The subdomain $subdomain does not exist or is not configured."
-    fi
-}
-
-# If subdomain is not specified, print information for all subdomains
-if [ -z "$subdomain" ]; then
-    for sub in "${!subdomain_ips[@]}"; do
-        print_subdomain_info "$sub"
-    done
-else
-    # Print information for the specified subdomain
-    print_subdomain_info "$subdomain"
-fi

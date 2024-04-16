@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#check for password
+if [ -z "$1" ]; then
+	echo "Error: Password missing"
+	echo "Usage: $0  <password>"
+	exit 1
+fi
+
+#setting the root password
+MYSQL_ROOT_PASSWORD="$1"
+
+#DATE
+DATE=$(date +'%d-%m-%Y')
+
+#dump file
+MYSQL_DUMP_FILE="backup.sql"
+
+#archive
+ARCHIVE_NAME="$DATE.tar.gz"
+
+#sql dumping
+echo "Dumping sql databases ....."
+mysqldump -u root -p"$MYSQL_ROOT_PASSWORD" --all-databases > "$MYSQL_DUMP_FILE"
+
+#Compressing to tar archive
+tar -czf "$ARCHIVE_NAME" "$MYSQL_DUMP_FILE"

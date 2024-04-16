@@ -1,4 +1,5 @@
-heck if both domain and subdomain parameters are provided
+#!/usr/bin/env bash
+#check if both domain and subdomain parameters are provided
 if [ $# -lt 1 ]; then
     echo "Usage: $0 <domain> [<subdomain>]"
     exit 1

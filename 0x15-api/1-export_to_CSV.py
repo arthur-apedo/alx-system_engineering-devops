@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ Gather data from an api"""
+import csv
 import requests
 import sys
-import csv
 
 
 def employee_data(emp_id):
@@ -31,7 +31,7 @@ def employee_data(emp_id):
                         "TASK_TITLE"])
         for todo in todo_data:
             writer.writerow([str(emp_id), str(name), str(todo['completed']),
-                str(todo['title'])])
+                            str(todo['title'])])
 
 
 if __name__ == "__main__":

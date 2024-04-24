@@ -18,7 +18,7 @@ def employee_data(emp_id):
     total_tasks = len(todo_data)
     complete = [todo for todo in todo_data if todo['completed']]
     completed = len(complete)
-    print(f"Employee {name} is done with tasks({completed}/{total_tasks})")
+    print(f"Employee {name} is done with tasks({completed}/{total_tasks}):")
     for todo in complete:
         print(f"\t{todo['title']}")
 

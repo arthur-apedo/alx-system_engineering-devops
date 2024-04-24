@@ -25,12 +25,13 @@ def employee_data(emp_id):
 
     # export to csv
     filename = f"{emp_id}.csv"
-    with open(filename, 'w') as f:
+    with open(filename, 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS",
                         "TASK_TITLE"])
         for todo in todo_data:
-            writer.writerow([emp_id, name, todo['completed'], todo['title']])
+            writer.writerow([str(emp_id), str(name), str(todo['completed']),
+                str(todo['title'])])
 
 
 if __name__ == "__main__":

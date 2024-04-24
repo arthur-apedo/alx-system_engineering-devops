@@ -20,7 +20,7 @@ def employee_data(emp_id):
     completed = len(complete)
     print(f"Employee {name} is done with tasks({completed}/{total_tasks}):")
     for todo in complete:
-        print(f"\t{todo['title']}")
+        print(f"\t {todo['title']}")
 
 
 if __name__ == "__main__":

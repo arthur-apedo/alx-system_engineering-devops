@@ -13,7 +13,7 @@ def employee_data(emp_id):
 
     # user info
     user_data = requests.get(url_usr).json()
-    name = user_data.get('name')
+    name = user_data.get('username')
     # todo list
     todo_data = requests.get(url_todo).json()
     total_tasks = len(todo_data)

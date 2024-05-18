@@ -1,9 +1,12 @@
-# fixing the number of allowed files in holberton user
-exec { 'fix-file-limit':
-  command => 'sed -i"/holberton hard/s/5/10000/" /etc/security/limits.conf',
-  path    => '/usr/local/bin/:/bin/:/sbin/'
+# this fixes the limit of a file at hbton user.
+
+exec { 'fix_limit_hbton_user':
+  command => 'sed -i "/holberton hard/s/5/10000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }
-exec { 'soft-file-limit':
-  command => 'sed -i"/holberton soft/s/4/20000/" /etc/security/limits.conf',
-  path    => '/usr/local/bin/:/bin/:/sbin/'
+
+# Increase soft file limit hbton ser.
+exec { 'increase_soft_file':
+  command => 'sed -i "/holberton soft/s/4/20000/" /etc/security/limits.conf',
+  path    => '/usr/local/bin/:/bin/'
 }

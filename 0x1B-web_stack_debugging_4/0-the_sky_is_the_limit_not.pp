@@ -7,5 +7,5 @@ exec { 'nginx-req-fix':
 exec { 'nginx-restart':
   command   => 'nginx restart',
   path      => '/usr/sbin:/sbin:/usr/bin:/bin',
-  subscribt => Exec['nginx-req-fix'],
+  subscript => Exec['nginx-req-fix'],
 }

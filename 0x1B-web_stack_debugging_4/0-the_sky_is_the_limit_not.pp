@@ -1,11 +1,12 @@
-# change the number of requests limit on nginx
-exec { 'nginx-req-fix':
+# this fixes the request limit at nginx
+
+exec { 'fix--for-nginx':
   command => 'sed -i "s/15/4096/" /etc/default/nginx',
-  path    => '/usr/local/bin/:/bin/',
+  path    => '/usr/local/bin/:/bin/'
 }
 
-exec { 'nginx-restart':
-  command   => 'nginx restart',
-  path      => '/usr/sbin:/sbin:/usr/bin:/bin',
-  subscript => Exec['nginx-req-fix'],
+# Restart Nginx
+-> exec { 'nginx-restart':
+  command => 'nginx restart',
+  path    => '/etc/init.d/'
 }

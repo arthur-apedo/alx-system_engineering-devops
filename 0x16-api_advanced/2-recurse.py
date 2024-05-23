@@ -1,30 +1,32 @@
 #!/usr/bin/python3
-""" A script for recursively finding the  top 10 hot posts in a subreddit """
+"""return list of titles for hot articles"""
 import requests
 
 
-def recurse(subreddit, hot_list[]=None, after=None):
-    """ returns the top 10 hot posts in  a subreddit """
-    if hot_list is None:
-        hot_list = []
+def recurse(subreddit, hot_list=[], after=None):
+    """
+    Returns a list containing the titles of all hot articles
+    for a given subreddit
+    """
+    app_name = '0x16-api_advanced'
+    user_name = 'FeelingPsychology300'
+    headers = {'User-Agent': f'{app_name}/0.0.1 by /u/{user_name}'}
+    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+    params = {'after': after}
+    response = requests.get(url, headers=headers, params=params,
+                            allow_redirects=False)
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=100"
-    headers = {'User-agent': 'Bot/0.1'}
-    params = {'after': after} if after else {}
+    if response.status_code != 200:
+        return None
 
-    response = requests.get(url, headers=headers, params=params)
-    try:
-        if response.status_code == 200:
-            all_data = response.json()
-            if "data" in all_data and "children" in all_data['data']:
-                for post in all_data['data']['children']:
-                    hot_list.append(post['data']['title'])
+    data = response.json().get('data')
+    after = data.get('after')
+    children = data.get('children')
 
-                    if all_data['data']['after']:
-                        recurse(subreddit, hot_list, data['data']['after'])
-                    else:
-                        return hot_list
-        else:
-            return None
-    except Exception as e:
-        print(e)
+    for child in children:
+        hot_list.append(child.get('data').get('title'))
+
+    if after is not None:
+        return recurse(subreddit, hot_list, after)
+
+    return hot_list
